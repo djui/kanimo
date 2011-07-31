@@ -44,6 +44,14 @@ int main(int argc, char *argv[])
   int k; // Pixel flag
   int l; // Alias X-Axis sampler
   int color; // Leaf colouring, for debugging
+
+  static const float S  =   0.9;      // Scale
+         const float Xs =   0.5 / S; // X-Scale
+         const float Ys =   1.1 / S; // Y-Scale
+  static const float Rs =   0.9;      // Radius-Scale
+  static const float Xt =  23;        // X-Translation
+  static const float Yt =  15;        // Y-Translation
+  static const float Rt =   5;        // Radius-Translation
   
   //puts("\x1b[0;34m"); // Set colour to blue
   for (f = F; f > 0; f--) // Frame counter loop
@@ -61,12 +69,6 @@ int main(int argc, char *argv[])
 	  {
 	    for (t = 0; t <= 1; t++) // Inner/Border loop (toggle Fill & Border/Erase method)
 	    {
-	      float Xs =   0.9;
-	      float Ys =   0.9;
-	      float Rs =   0.8;
-	      float Xt = -20;
-	      float Yt =  30;
-	      float Rt =   5;
 	      if ( ( Xs*pow(0.45*(x+l) - (Xt+C[6*6+0]), 2) + Ys*pow(y - (Yt+C[6*6+1]), 2) <= Rs*pow(C[6*6+2] + (Rt+!t*B), 2) &&   // Mask to hide...
 		     Xs*pow(0.45*(x+l) - (Xt+C[6*5+3]), 2) + Ys*pow(y - (Yt+C[6*5+4]), 2) <= Rs*pow(C[6*5+5] + (Rt+!t*B), 2) ) || // ...lower overflow
 		     y < H)
