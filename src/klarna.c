@@ -31,7 +31,7 @@ static const int C[] = {   // Circles' data, leaves in background to foreground 
   43,  5, 20, // < black
   78, 34, 35  // > black
 };
-int colors[] = {3,2,4,6,1,5,7};
+int colors[] = {3, 2, 4, 6, 1, 5, 7};
 
 int main(int argc, char *argv[])
 {
