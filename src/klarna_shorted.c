@@ -1,3 +1,4 @@
+// Good function for scale-wooble with start at scale 1, max 1.5, min ~0.75, and ease-out at ~5: y=1+sin(x*x)*exp(0.5*x)
 f=100,x,y,i,j,t,C[]=" )Qj)H  Tm3H+EAX!3 2O_+;4#I~8R+MBX%4U%4nBB";
 
 s(x){return x*x;}
