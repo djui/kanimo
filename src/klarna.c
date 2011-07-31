@@ -13,7 +13,7 @@ static const int A   =  3; // Anti-Aliasing value
 static const int W   = 72; // Output width
 static const int H   = 24; // Output height
 static const int B   =  1; // Circle border size
-static const int K[] = {' ','.','o','@','@'}; // Pixel "brightness" with indexes [0,1,2,_,4]
+static const int K[] = {' ', '.', ',', ')', '\'', '\\', '/', '@'}; // Pixel "brightness"
 static const int C[] = {   // Circles' data, leaves in background to foreground order
 // x, y, r
    0,14,49, // < yellow
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 	
 	if (k) // Increase brightness?
 	{
-	  j++;
+	  j ^= k << x % A; // Bit-shifting it's alias position: t=1,x%A=0 -> 1, x%A=1 -> 2, x%A=2 -> 4.
 	}
 	
 	if (x % A == 0) // Anti-aliasing sampling reached?
