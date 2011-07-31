@@ -69,16 +69,17 @@ int main(int argc, char *argv[])
 	  {
 	    for (t = 0; t <= 1; t++) // Inner/Border loop (toggle Fill & Border/Erase method)
 	    {
-	      if ( ( Xs*pow(0.45*(x+l) - (Xt+C[6*6+0]), 2) + Ys*pow(y - (Yt+C[6*6+1]), 2) <= Rs*pow(C[6*6+2] + (Rt+!t*B), 2) &&   // Mask to hide...
-		     Xs*pow(0.45*(x+l) - (Xt+C[6*5+3]), 2) + Ys*pow(y - (Yt+C[6*5+4]), 2) <= Rs*pow(C[6*5+5] + (Rt+!t*B), 2) ) || // ...lower overflow
-		     y < H)
+	      if ( ( pow(Xs*(x+l) + Xt - C[6*6+0], 2) + pow(Ys*y + -Yt - C[6*6+1], 2) > pow(Rs*C[6*6+2] + (Rt+!t*B), 2) &&   // Mask to hide...
+		     pow(Xs*(x+l) + Xt - C[6*5+3], 2) + pow(Ys*y + -Yt - C[6*5+4], 2) > pow(Rs*C[6*5+5] + (Rt+!t*B), 2) ) || // ...lower-half...
+  		     y >= H*S)                                                                                                 // ...overflow
 	      {
-		if ( Xs*pow(0.45*(x+l) - (Xt+C[6*i+0]), 2) + Ys*pow(y - (Yt+C[6*i+1]), 2) <= Rs*pow(C[6*i+2] + (Rt+!t*B), 2) && // Inside left...
-		     Xs*pow(0.45*(x+l) - (Xt+C[6*i+3]), 2) + Ys*pow(y - (Yt+C[6*i+4]), 2) <= Rs*pow(C[6*i+5] + (Rt+!t*B), 2) )  // ...and right circle?
-		{
-		  k = t; // Update current pixel with latest value (filled or erased)
-		  color = colors[i]; // Set colour of most foreground leaf
-		}
+		continue;
+	      }
+	      if ( pow(Xs*(x+l) + Xt - C[6*i+0], 2) + pow(Ys*y + -Yt - C[6*i+1], 2) <= pow(Rs*C[6*i+2] + (Rt+!t*B), 2) && // Inside left...
+		   pow(Xs*(x+l) + Xt - C[6*i+3], 2) + pow(Ys*y + -Yt - C[6*i+4], 2) <= pow(Rs*C[6*i+5] + (Rt+!t*B), 2) )  // ...and right circle?
+	      {
+		k = t; // Update current pixel with latest value (filled or erased)
+		color = colors[i]; // Set colour of most foreground leaf
 	      }
 	    }
 	  }
