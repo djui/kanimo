@@ -7,10 +7,10 @@
 #include <math.h>
 #include <sysexits.h>
 
-static const int FPS = 50; // Frames per second
-static const int F   =  1; // Frame amount
-static const int A   =  3; // Anti-Aliasing value
 static const int B   =  1; // Circle border size
+static const int FPS =  50; // Frames per second
+static const int F   =   1; // Frame amount
+static const int A   =   3; // Anti-Aliasing value
 static const int W   =  110; // Output width
 static const int H   =  24; // Output height
 static const int K[] = {' ', '.', '.', ')', '.', '\\', '/', '@'}; // Pixel "brightness"
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
   int l; // Alias X-Axis sampler
   int color; // Leaf colouring, for debugging
   
-  for (f = F; f > 0; f--) // Frame counter
+  for (f = F; f > 0; f--) // Frame counter loop
   {
     for (y = 0; y < H*A; y++) // Y-Axis loop (Subpixel-sampling)
     {
