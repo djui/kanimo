@@ -57,12 +57,12 @@ int main(int argc, char *argv[])
 	{
 	  for (t = 0; t <= 1; t++) // Toggle Fill & Border/Erase method
 	  {
-            float Xs =  0.9;
-            float Ys =  0.9;
-            float Rs =  0.8;
+            float Xs =   0.9;
+            float Ys =   0.9;
+            float Rs =   0.8;
             float Xt = -20;
-            float Yt = 30;
-            float Rt = 5;
+            float Yt =  30;
+            float Rt =   5;
 	    if ( Xs*pow(0.45*x - (Xt+C[6*6+0]), 2) + Ys*pow(y - (Yt+C[6*6+1]), 2) <= Rs*pow(C[6*6+2] + (Rt+!t*B), 2) && // Mask to hide...
 	         Xs*pow(0.45*x - (Xt+C[6*5+3]), 2) + Ys*pow(y - (Yt+C[6*5+4]), 2) <= Rs*pow(C[6*5+5] + (Rt+!t*B), 2) && // ...lower overflow
                  Xs*pow(0.45*x - (Xt+C[6*i+0]), 2) + Ys*pow(y - (Yt+C[6*i+1]), 2) <= Rs*pow(C[6*i+2] + (Rt+!t*B), 2) && // Inside left...
