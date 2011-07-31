@@ -12,7 +12,7 @@ static const int F   =   1; // Frame amount
 static const int A   =   3; // Anti-Aliasing value
 static const int W   =  110; // Output width
 static const int H   =  24; // Output height
-static const int B   =   2; // Circle border size
+static const int B   =   1; // Circle border size
 static const int K[] = {' ', '.', '.', ')', '.', '\\', '/', '@'}; // Pixel "brightness"
 static const int C[] = {   // Circles' data, leaves in background to foreground order
 // x, y, r
