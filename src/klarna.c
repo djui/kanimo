@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
   int l; // Alias X-Axis sampler
   int color; // Leaf colouring, for debugging
   
+  //puts("\x1b[0;34m"); // Set colour to blue
   for (f = F; f > 0; f--) // Frame counter loop
   {
     for (y = 0; y < H*A; y++) // Y-Axis loop (Subpixel-sampling)
@@ -83,7 +84,7 @@ int main(int argc, char *argv[])
 	  j ^= k << l; // Increase pixel brightness: t=1,{l=0->1, l=1->2, l=2->4}.
 	}
 	
-	printf("\x1b[0;3%dm", color); // Colourize pixel
+	//printf("\x1b[0;3%dm", color); // Colourize pixel
 	putchar(K[j]); // Print pixel with brightness
       }
       putchar('\n'); // Next line
