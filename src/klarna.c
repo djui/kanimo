@@ -16,20 +16,20 @@ static const int B   =   1; // Circle border size
 static const int K[] = {' ', '.', '.', ')', '.', '\\', '/', '@'}; // Pixel "brightness"
 static const int C[] = {   // Circles' data, leaves in background to foreground order
 // x, y, r
-   0, 14, 49, // < yellow
-  74,  4, 40, // > yellow
+   0, 14, 48, // < yellow
+  74,  8, 41, // > yellow
    0,  0, 52, // < green
   77, 19, 40, // > green
-  11, 37, 33, // < blue
-  46,  1, 19, // > blue
-   0, 20, 47, // < cyan
-  63,  9, 27, // > cyan
+  11, 35, 33, // < blue
+  46,  4, 18, // > blue
+   0, 25, 49, // < cyan
+  65,  8, 27, // > cyan
   20,  3, 41, // < red
-  94, 24, 50, // > red
-  11, 45, 34, // < purple
+  94, 24, 49, // > red
+  11, 45, 37, // < purple
   46,  5, 20, // > purple
   43,  5, 20, // < black
-  78, 34, 35  // > black
+  78, 34, 30  // > black
 };
 int colors[] = {3, 2, 4, 6, 1, 5, 7};
 
