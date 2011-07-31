@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
   //puts("\x1b[0;34m"); // Set colour to blue
   for (f = F; f > 0; f--) // Frame counter loop
   {
-    for (y = 0; y < H*A; y++) // Y-Axis loop (Subpixel-sampling)
+    for (y = 0; y < H; y++) // Y-Axis loop (Subpixel-sampling)
     {
       for (x = 0; x < W; x++) // X-Axis loop
       {
