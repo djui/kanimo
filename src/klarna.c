@@ -10,10 +10,10 @@
 static const int FPS = 50; // Frames per second
 static const int F   =  1; // Frame amount
 static const int A   =  3; // Anti-Aliasing value
-static const int W   = 72; // Output width
-static const int H   = 24; // Output height
 static const int B   =  1; // Circle border size
-static const int K[] = {' ', '.', ',', ')', '\'', '\\', '/', '@'}; // Pixel "brightness"
+static const int W   =  110; // Output width
+static const int H   =  24; // Output height
+static const int K[] = {' ', '.', '.', ')', '.', '\\', '/', '@'}; // Pixel "brightness"
 static const int C[] = {   // Circles' data, leaves in background to foreground order
 // x, y, r
    0, 14, 49, // < yellow
@@ -42,49 +42,49 @@ int main(int argc, char *argv[])
   int t; // Fill or Border toggler
   int j; // Brightness value
   int k; // Pixel flag
-  int color; // For debugging
+  int l; // Alias X-Axis sampler
+  int color; // Leaf colouring, for debugging
   
   for (f = F; f > 0; f--) // Frame counter
   {
-    for (y = 0; y < H*A; y+=A) // X-axis Anti-aliasing
+    for (y = 0; y < H*A; y++) // Y-Axis loop (Subpixel-sampling)
     {
-      j = 0; // Initial brightness: dark
-      for (x = 0; x < W*2; x++)
+      for (x = 0; x < W; x++) // X-Axis loop
       {
-        color = 0; // Default colour is black
-	k = 0;
-	for (i = 0; i <= 7-1; i++) // Pick circle from background to foreground
+	j = 0; // Initial brightness: dark
+	color = 0; // Default colour is black
+	for (l = 0; l < A; l++) // Sampling loop
 	{
-	  for (t = 0; t <= 1; t++) // Toggle Fill & Border/Erase method
+	  k = 0;
+	  for (i = 0; i <= 7-1; i++) // Leaf loop (pick circle from back- to foreground)
 	  {
-            float Xs =   0.9;
-            float Ys =   0.9;
-            float Rs =   0.8;
-            float Xt = -20;
-            float Yt =  30;
-            float Rt =   5;
-	    if ( Xs*pow(0.45*x - (Xt+C[6*6+0]), 2) + Ys*pow(y - (Yt+C[6*6+1]), 2) <= Rs*pow(C[6*6+2] + (Rt+!t*B), 2) && // Mask to hide...
-	         Xs*pow(0.45*x - (Xt+C[6*5+3]), 2) + Ys*pow(y - (Yt+C[6*5+4]), 2) <= Rs*pow(C[6*5+5] + (Rt+!t*B), 2) && // ...lower overflow
-                 Xs*pow(0.45*x - (Xt+C[6*i+0]), 2) + Ys*pow(y - (Yt+C[6*i+1]), 2) <= Rs*pow(C[6*i+2] + (Rt+!t*B), 2) && // Inside left...
-	         Xs*pow(0.45*x - (Xt+C[6*i+3]), 2) + Ys*pow(y - (Yt+C[6*i+4]), 2) <= Rs*pow(C[6*i+5] + (Rt+!t*B), 2) )  // ...and right circle?
+	    for (t = 0; t <= 1; t++) // Inner/Border loop (toggle Fill & Border/Erase method)
 	    {
-	      k = t; // Update current pixel with latest value (filled or erased)
-              color = colors[i]; // Set colour of most foreground leaf
+	      float Xs =   0.9;
+	      float Ys =   0.9;
+	      float Rs =   0.8;
+	      float Xt = -20;
+	      float Yt =  30;
+	      float Rt =   5;
+	      if ( ( Xs*pow(0.45*(x+l) - (Xt+C[6*6+0]), 2) + Ys*pow(y - (Yt+C[6*6+1]), 2) <= Rs*pow(C[6*6+2] + (Rt+!t*B), 2) &&   // Mask to hide...
+		     Xs*pow(0.45*(x+l) - (Xt+C[6*5+3]), 2) + Ys*pow(y - (Yt+C[6*5+4]), 2) <= Rs*pow(C[6*5+5] + (Rt+!t*B), 2) ) || // ...lower overflow
+		     y < H)
+	      {
+		if ( Xs*pow(0.45*(x+l) - (Xt+C[6*i+0]), 2) + Ys*pow(y - (Yt+C[6*i+1]), 2) <= Rs*pow(C[6*i+2] + (Rt+!t*B), 2) && // Inside left...
+		     Xs*pow(0.45*(x+l) - (Xt+C[6*i+3]), 2) + Ys*pow(y - (Yt+C[6*i+4]), 2) <= Rs*pow(C[6*i+5] + (Rt+!t*B), 2) )  // ...and right circle?
+		{
+		  k = t; // Update current pixel with latest value (filled or erased)
+		  color = colors[i]; // Set colour of most foreground leaf
+		}
+	      }
 	    }
 	  }
+	  
+	  j ^= k << l; // Increase pixel brightness: t=1,{l=0->1, l=1->2, l=2->4}.
 	}
 	
-	if (k) // Increase brightness?
-	{
-	  j ^= k << x % A; // Bit-shifting it's alias position: t=1,x%A=0 -> 1, x%A=1 -> 2, x%A=2 -> 4.
-	}
-	
-	if (x % A == 0) // Anti-aliasing sampling reached?
-	{
-          printf("\x1b[0;3%dm", color); // Colourize pixel
-	  putchar(K[j]); // Print pixel with brightness
-	  j = 0; // Reset brightness
-      	}
+	printf("\x1b[0;3%dm", color); // Colourize pixel
+	putchar(K[j]); // Print pixel with brightness
       }
       putchar('\n'); // Next line
     }
