@@ -1,4 +1,4 @@
 CC=gcc
 
 all:
-	$(CC) -o bin/klarna src/klarna.c
+	$(CC) -o bin/kanim src/kanim.c
