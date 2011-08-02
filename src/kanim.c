@@ -44,8 +44,13 @@ int main(int argc, char *argv[])
   int l; // Alias X-Axis sampler
   int color; // Leaf colouring, for debugging
 
-  const float Xs =  0.17 / S; // X-Scale
-  const float Ys =  1.0  / S; // Y-Scale
+  // Convert the circle data into ASCII
+  // for (i=0;i<42;i++) putchar(48+(i+1)%10); puts("");
+  // for (i=0;i<42;i++) putchar(32+C[i]);     puts("");
+  // return;
+  
+  const float Xs = 0.17 / S; // X-Scale
+  const float Ys = 1.0  / S; // Y-Scale
   
   puts("\x1b[0;34m"); // Set colour to blue
   for (f = F; f > 0; f--) // Frame counter loop
