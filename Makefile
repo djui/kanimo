@@ -1,9 +1,10 @@
 CC=gcc
+FLAGS=-std=c99 -O3
 
 all: normal obfuscated
 
 normal:
-	$(CC) -o bin/kanim src/kanim.c
+	$(CC) $(FLAGS) -o bin/kanim src/kanim.c
 
 obfuscated:
-	$(CC) -o bin/kanimo src/kanim_obfuscated.c
+	$(CC) $(FLAGS) -o bin/kanimo src/kanim_obfuscated.c
