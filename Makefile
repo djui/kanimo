@@ -7,4 +7,4 @@ normal:
 	$(CC) $(FLAGS) -o bin/kanim src/kanim.c
 
 obfuscated:
-	$(CC) $(FLAGS) -o bin/kanimo src/kanim_obfuscated.c
+	$(CC) $(FLAGS) -o bin/kanimo src/kanimo.c
