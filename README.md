@@ -1,6 +1,6 @@
 # Javascript version
 
-Checkout the [Javascript version](https://raw.github.com/djui/kanim/master/src/kanimo.html).
+Checkout the [Javascript version](https://raw.github.com/djui/kanimo/master/src/kanimo.html).
 
 # Variables
 
